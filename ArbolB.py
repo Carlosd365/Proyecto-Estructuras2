@@ -87,5 +87,32 @@ class ArbolB:
         if not nodo.es_hoja:
             self.recorrido_inorden(nodo.hijos[-1])
 
+    def listar_nombre(self, nodo):
+       
+        elementos = []
+        self._recolectar_datos(nodo, elementos)
+      
+        elementos.sort(key=lambda e: e.Nombre)
+
+        for elem in elementos: 
+            elem.ImprimirporName()
+    
+    def listar_calificacion(self,nodo):
+       
+        elementos = []
+        self._recolectar_datos(nodo, elementos)
+
+        elementos.sort(key=lambda e: e.Calificacion, reverse=True)
+
+        for elem in elementos: 
+            elem.ImprimirporCalificacion()
+
+    def _recolectar_datos(self, nodo, lista):
+        for i in range(len(nodo.claves)):
+            if not nodo.es_hoja:
+                self._recolectar_claves(nodo.hijos[i], lista)
+            lista.append(nodo.claves[i])
+        if not nodo.es_hoja:
+            self._recolectar_claves(nodo.hijos[-1], lista)
 
             

@@ -39,8 +39,17 @@ while True:
         input()
 
     elif opcion == "3":
-        print("Daviiid")
-       
+        print("Opciones de lista")
+        print("1. Listar por nombre")
+        print("2. Listar por calificación")
+        listar = input("Seleccione una opción: ")
+        if (listar == "1"):
+            arbol.listar_nombre(raiz)
+        elif (listar == "2"):
+            arbol.listar_calificacion(raiz)
+        else :
+            print("Opcion invalida")
+        input("Impreciones cualquier tecla para continuar")
         
     elif opcion == "4":
         break
