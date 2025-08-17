@@ -2,18 +2,39 @@ import os
 from ArbolB import NodoB, ArbolB
 from Proveedor import Proveedor
 
-x = 0  
-arbol = ArbolB()
-raiz = NodoB()  
+x = 1  
+orden = 5
+arbol = ArbolB(orden)
+raiz = NodoB(orden)  
+
+proveedores_iniciales = [
+    ("Ana", "Plomero", 5),
+    ("Luis", "Electricista", 4),
+    ("Sofía", "Plomero", 3),
+    ("Carlos", "Carpintero", 5),
+    ("Marta", "Programador", 4),
+    ("José", "Albañil", 2),
+    ("Lucía", "Diseñador", 5),
+    ("Pedro", "Plomero", 1),
+    ("Elena", "Electricista", 3),
+    ("Diego", "Carpintero", 4),
+    ("Diego", "Plomero", 4),
+]
+
+for nombre, servicio, calificacion in proveedores_iniciales:
+    trabajador = Proveedor(x, nombre, servicio, calificacion)
+    raiz = arbol.insertar_en_arbol(raiz, trabajador)
+    x += 1
 
 while True:
     os.system('cls')
     print("""   BIENVENIDO  
-          Ingrese una de las Opciónes Segun lo que Desea Hacer:
-          1. Ingresar a un Nuevo Proveedor
-          2. Buscar a un Proveedor por Servico Ofrecido
-          3. Ver a los proveedores en orden (Nombre/Calificación)
-          4. Salir del programa""")
+        Ingrese una de las Opciónes Segun lo que Desea Hacer:
+        1. Ingresar a un Nuevo Proveedor
+        2. Buscar a un Proveedor por Servico Ofrecido
+        3. Ver a los proveedores en orden (Nombre/Calificación)
+        4. Mostrar Arbol B
+        5. Salir del programa""")
 
     opcion = input("Seleccione una opción: ")
 
@@ -34,8 +55,15 @@ while True:
             input()
 
     elif opcion == "2":
-        print("Carloos")
-        arbol.recorrido_inorden(raiz)
+        servicio = input("Ingrese el servicio que desea buscar: \n")
+        resultados = arbol.buscar_por_servicio(raiz, servicio)
+
+        if resultados:
+            print(f"Se encontraron {len(resultados)} proveedores para '{servicio}':")
+            for r in resultados:
+                r.ImprimirporServicio()
+        else:
+            print("No se encontraron proveedores con ese servicio.")
         input()
 
     elif opcion == "3":
@@ -50,8 +78,13 @@ while True:
         else :
             print("Opcion invalida")
         input("Impreciones cualquier tecla para continuar")
-        
+
     elif opcion == "4":
+        arbol.mostrar_arbol(raiz)
+        input()
+        
+    elif opcion == "5":
+        print("Saliendo del programa ...")
         break
 
     else:
